@@ -1,18 +1,20 @@
-const nodemailer = require("nodemailer")
-const express = require("express")
+const express = require("express");
+const { enviarCorreo } = require("./enviarCorreo");
 
 const app = express();
 
 app.use(express.json());
 
+ 
 
+app.post("/send-email",  (req,res)=>{
 
-app.post("/send-email", (req,res)=>{
+    
 
+     const enviado = enviarCorreo(req.body)
 
-    const {host, user, pass, from, to, subject, text} = req.body;
-
-    const transporter = nodemailer.createTransport({
+    
+    /*const transporter = nodemailer.createTransport({
         host,
         port: 587,
         secure: false,
@@ -36,7 +38,7 @@ app.post("/send-email", (req,res)=>{
             console.log("Email enviado")
             res.status(200).json({status: true})
         }
-    })
+    }) */
 })
 
 

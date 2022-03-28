@@ -1,7 +1,10 @@
+const nodemailer = require("nodemailer")
 
 const enviarCorreo = ( parametros )=>{
 
+
     const {host, user, pass, from, to, subject, text} = parametros;
+    console.log(parametros);
 
     const transporter = nodemailer.createTransport({
         host,
@@ -12,7 +15,6 @@ const enviarCorreo = ( parametros )=>{
             pass
         }
     })
-
     const mailOptions = {
         from,
         to,
@@ -20,9 +22,10 @@ const enviarCorreo = ( parametros )=>{
         text
     }
 
-    transporter.sendMail(mailOptions, (error, info)=>{
+    transporter.sendMail(mailOptions,  async(error, info)=>{
+        var res;
         if(error){
-            return (error.message)
+            return false
         }else{
             return true
         }
